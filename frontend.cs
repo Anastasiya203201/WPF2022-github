@@ -48,7 +48,13 @@ class Frontend : Window {
         stack.Children.Add(angle);
         btn.Content = "Start";
         stack.Children.Add(btn);
-        //  btn.Click += ButtonOnClick; 
+        btn.Click += ButtonOnClick;
+
+        void ButtonOnClick (object sender, RoutedEventArgs args) {
+            btn = args.Source as Button;
+            if (btn != null)
+                MessageBox.Show("Тело упало: x = " + coordinate_x + "y = " + coordinate_y);
+        }
     }
 
 }
