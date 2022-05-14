@@ -15,16 +15,14 @@ namespace backend_improved {
         public List<double> v_y_list = new List<double>();               //Проекция скорости на Oy.
 
       public  Parabola(double x, double y, double a, double v) {
-            path_x.Add(x);   //Начальное положение тела по оси Ox.r
+            path_x.Add(x);   //Начальное положение тела по оси Ox.
             path_y.Add( y);   //Начальное положение тела по оси Oy.
             double alpha = a; //Угол, под которым будет брошено тело.
             double v_0 = v;   //Начальная скорость.
-            a = a/180*Math.PI;
+            a = a/180 * Math.PI;
             v_x_list.Add(v*Math.Cos(a));
             v_y_list.Add(v*Math.Sin(a));
 
-
-            //  public Parabola(){
             int i = 0;
             for (double t = 0; t <= 1; t += 0.01) {
                 double wind_resistance = t / 2;
@@ -34,7 +32,7 @@ namespace backend_improved {
                 path_y.Add(path_y[i] + 0.01 * v_y_list[i]);
                 steps.Add(t);
                 if (v_y_list[i] < 0)
-                break;
+                    break;
                 ++i;
             }
                 
@@ -56,13 +54,8 @@ namespace backend_improved {
                 Console.WriteLine("*************************");
 
                 //***********************************
-               // return Tuple.Create(path_x, path_y, v_x_list, v_y_list, steps);
-            //}
-        }
-         /*       static void Main(string[] args) {
-                    trajectory();
-                }
-         */
+            
+      }
     }
 }
 
