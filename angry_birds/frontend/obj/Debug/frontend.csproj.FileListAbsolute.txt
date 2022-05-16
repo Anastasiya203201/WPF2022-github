@@ -12,3 +12,5 @@ C:\Users\Nastya\Desktop\work\WPF2022-github\angry_birds\frontend\obj\Debug\front
 C:\Users\Nastya\Desktop\work\WPF2022-github\angry_birds\frontend\bin\Debug\frontend.exe.config
 C:\Users\Nastya\Desktop\work\WPF2022-github\angry_birds\frontend\bin\Debug\frontend.exe
 C:\Users\Nastya\Desktop\work\WPF2022-github\angry_birds\frontend\bin\Debug\frontend.pdb
+C:\Users\Nastya\Desktop\work\WPF2022-github\angry_birds\frontend\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Nastya\Desktop\work\WPF2022-github\angry_birds\frontend\obj\Debug\frontend.csproj.CopyComplete

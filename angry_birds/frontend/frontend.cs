@@ -5,7 +5,7 @@ using System.Windows.Media;
 using System.Windows.Controls;
 using System.Windows.Shapes;
 using backend_improved;
-
+using System.Windows.Threading;
 
 class AngryBirds : Window {
     [STAThread]
@@ -54,49 +54,76 @@ class AngryBirds : Window {
         stack.Children.Add(angle);
         btn.Content = "Start";
         stack.Children.Add(btn);
-        btn.Click += ButtonOnClick;
 
-        
-       
-
-        void ButtonOnClick (object sender, RoutedEventArgs args) {
-            btn = args.Source as Button;
-            if (btn != null) {
-
-                Parabola p = new Parabola(
+        Parabola p = new Parabola(
                     Convert.ToDouble(coordinate_x.Text),
                     Convert.ToDouble(coordinate_y.Text),
                     Convert.ToDouble(angle.Text),
                     Convert.ToDouble(starting_speed.Text));
 
-                Data.tr.Points = new PointCollection();
-                for (int i = 0; i < p.path_x.Count; ++i) {
-                        Data.tr.Points.Add(new Point(100*p.path_x[i], 400-100*p.path_y[i]));
-                }
+
+        btn.Click += ButtonOnClick;
+
+        Data.tmr = new DispatcherTimer();
+        Data.tmr.Interval = TimeSpan.FromSeconds(1);
+        Data.tmr.Tick += TimerOnTick;
+
+        void ButtonOnClick (object sender, RoutedEventArgs args) {
+            btn = args.Source as Button;
+            if (btn != null) {
                 MessageBox.Show("Тело упало:    x = " + p.path_x[p.path_x.Count-1] + "    " + "y = " + p.path_y[p.path_y.Count-1]);
                 Draw z = new Draw();
                 z.Show();
+                Data.i = 0;
+                Data.tmr.Start();
             }
+            
+        }
+
+
+
+
+        void TimerOnTick(object sender, EventArgs args) {
+            
+            Data.tr.Points = new PointCollection();
+            //   for (int i = 0; i < p.path_x.Count; ++i) {
+            if (Data.i < p.path_x.Count)
+            {
+                Data.tr.Points.Add(new Point(100 * p.path_x[Data.i], 400 - 100 * p.path_y[Data.i]));
+                ++Data.i;
+                Data.win.UpdateLayout();
+                Data.win.InvalidateVisual();
+                // MessageBox.Show(Convert.ToString(Data.i));
+            }
+            else {
+                Data.tmr.Stop();
+            }
+            //}
         }
     }
 }
 
 public class Data { 
     public static Polyline tr = new Polyline();
+    public static int i = 0;
+    public static DispatcherTimer tmr;
+    public static Canvas win; 
+
 }
 public class Draw : Window {
+
     public Draw() {
-        Canvas win = new Canvas();
-        win.Width = 1000;
-        win.Height = 1000;
+        Data.win = new Canvas();
+        Data.win.Width = 1000;
+        Data.win.Height = 1000;
      //   win.Background = Brushes.Green;
         Data.tr.Stroke = Brushes.Black;
         Data.tr.StrokeThickness = 4;
-        win.Children.Add(Data.tr); 
-        Content = win;
-       
-    }  
+        Data.win.Children.Add(Data.tr);
+        Data.win.InvalidateVisual();
+        
+        Content = Data.win;
+    }
 
 }  
-
 

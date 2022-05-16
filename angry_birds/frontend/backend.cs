@@ -36,7 +36,7 @@ namespace backend_improved {
                 ++i;
             }
                 
-                //**********FOR_DEBAG****************
+        /*        //**********FOR_DEBAG****************
                 foreach (var el in path_x)
                     Console.WriteLine(el);
                 Console.WriteLine("*************************");
@@ -53,7 +53,7 @@ namespace backend_improved {
                     Console.WriteLine(el);
                 Console.WriteLine("*************************");
 
-                //***********************************
+                //***********************************             */
             
       }
     }
