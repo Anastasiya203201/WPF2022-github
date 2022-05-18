@@ -65,7 +65,7 @@ class AngryBirds : Window {
         btn.Click += ButtonOnClick;
 
         Data.tmr = new DispatcherTimer();
-        Data.tmr.Interval = TimeSpan.FromSeconds(1);
+        Data.tmr.Interval = TimeSpan.FromSeconds(0.01);
         Data.tmr.Tick += TimerOnTick;
 
         void ButtonOnClick (object sender, RoutedEventArgs args) {
@@ -77,28 +77,18 @@ class AngryBirds : Window {
                 Data.i = 0;
                 Data.tmr.Start();
             }
-            
         }
-
-
-
 
         void TimerOnTick(object sender, EventArgs args) {
             
-            Data.tr.Points = new PointCollection();
-            //   for (int i = 0; i < p.path_x.Count; ++i) {
-            if (Data.i < p.path_x.Count)
-            {
+            if (Data.i < p.path_x.Count) {
                 Data.tr.Points.Add(new Point(100 * p.path_x[Data.i], 400 - 100 * p.path_y[Data.i]));
                 ++Data.i;
-                Data.win.UpdateLayout();
-                Data.win.InvalidateVisual();
-                // MessageBox.Show(Convert.ToString(Data.i));
+                
             }
             else {
                 Data.tmr.Stop();
             }
-            //}
         }
     }
 }
@@ -108,10 +98,8 @@ public class Data {
     public static int i = 0;
     public static DispatcherTimer tmr;
     public static Canvas win; 
-
 }
 public class Draw : Window {
-
     public Draw() {
         Data.win = new Canvas();
         Data.win.Width = 1000;
@@ -119,11 +107,8 @@ public class Draw : Window {
      //   win.Background = Brushes.Green;
         Data.tr.Stroke = Brushes.Black;
         Data.tr.StrokeThickness = 4;
-        Data.win.Children.Add(Data.tr);
-        Data.win.InvalidateVisual();
-        
+        Data.win.Children.Add(Data.tr);        
         Content = Data.win;
     }
-
 }  
 
