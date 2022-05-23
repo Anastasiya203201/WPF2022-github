@@ -92,6 +92,22 @@ class AngryBirds : Window {
             }
         }
     }
+    private void Window_Loaded(object sender, RoutedEventArgs e) {
+        DispatcherTimer timer = new DispatcherTimer();
+        timer.Tick += new EventHandler(timer_Tick);
+        timer.Interval = new TimeSpan(0, 0, 0, 0, 50);
+        timer.Start();
+    }
+
+    void timer_Tick(object sender, EventArgs e) {
+        long bird1Pos = Convert.ToInt64(Data.tr.GetValue(Canvas.LeftProperty));
+        if (bird1Pos >= 800) {
+            Canvas.SetLeft(Data.tr, 12);
+        }
+        else {
+            Canvas.SetLeft(Data.tr, bird1Pos + 10);
+        }
+    }
 }
 
 public class Data { 
@@ -109,6 +125,15 @@ public class Draw : Window {
         Data.tr.Stroke = Brushes.Black;
         Data.tr.StrokeThickness = 4;
         Data.win.Children.Add(Data.tr);
+
+        Uri bird = new Uri("pack://application:,,,/bird.png");
+        BitmapImage bitmap = new BitmapImage(bird);                    
+        Image img = new Image();                                     
+        img.Source = bitmap;
+        img.Width = 100;
+        img.Height = 100;
+        Canvas.SetTop(img, 300);
+        Data.win.Children.Add(img);
 
         OpenFileDialog dialog = new OpenFileDialog();
         dialog.Filter = "Images |*.png;*.jpg";

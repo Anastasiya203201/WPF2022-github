@@ -49,5 +49,8 @@
     <Compile Include="backend.cs" />
     <Compile Include="frontend.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="bird.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
